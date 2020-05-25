@@ -42,7 +42,7 @@ def AttractorAnalysis(nodes,StateTraj,inter_mat,folder):
             j += 1
 
     for i in range(1,len(attract_list)+1):
-        state = str2vect(attract_list[i-1]).tolist()
+        state = num2vect(attract_list[i-1],len(nodes)).tolist()
         for j,node_value in enumerate(state):
             if node_value == 1:
                 worksheet.write(j+1,i,node_value,cell_format)

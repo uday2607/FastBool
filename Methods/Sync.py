@@ -36,8 +36,8 @@ def Dynamics(IniVector,inter_mat,steps,values,fixed_state,turn_state,networkx,pl
             nextVector = UpdateFixedState(nextVector, fixed_state)
         if networkx:
             state_vect.append([nextVector])
-            prevV = vect2str(prevVector)
-            nextV = vect2str(nextVector)
+            prevV = vect2num(prevVector)
+            nextV = vect2num(nextVector)
             traj = (prevV,nextV)
             state_traj.append(traj)
         if np.all(prevVector == nextVector):
@@ -59,7 +59,7 @@ def Dynamics(IniVector,inter_mat,steps,values,fixed_state,turn_state,networkx,pl
             pickle.dump(state_traj,f, protocol=pickle.HIGHEST_PROTOCOL)
 
     if np.all(prevVector == nextVector): #Fixed Point Attractors
-        return (True, vect2str(IniVector), vect2str(nextVector), PlotNodes) #Fixed Point steady state. IniVector is the basin of the Steady state
+        return (True, vect2num(IniVector), vect2num(nextVector), PlotNodes) #Fixed Point steady state. IniVector is the basin of the Steady state
     else:
         return (False, False, False, PlotNodes) #If it is not a steady state don't return anything
 
@@ -173,7 +173,7 @@ def SummarySync(nodes,inter_mat,input,IniState,FixedState,TurnState,folder):
 
     for i, (state,values) in enumerate(SteadyState.items()):
         worksheet.write(0,i+1,'Fixed point')
-        vect = str2vect(state)
+        vect = num2vect(state, len(nodes))
         for j,node in enumerate(vect):
             if node == input['node_values'][0]:
                 worksheet.write(j+1,i+1,str(node),cell_format)

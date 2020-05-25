@@ -5,21 +5,30 @@ import numba as nb
 
 ''' Important functions which can be used throughout the package '''
 ################################################################################
+@nb.jit(nopython=True, cache=True, nogil=True, fastmath=True)
+def bin2num(arr):
 
-def vect2str(input):
+    num = 0
+    n = len(arr)
+    for i in range(n):
+        num = num + arr[i]*(2**(n-i-1))
+
+    return num
+
+def vect2num(input):
     '''Converts Vector to a binary number for easy Graph creation'''
 
     arr = np.copy(input).astype(np.int8)
     arr = np.where(arr < 0, 0 ,arr)
-    s = np.array_str(arr).strip('[').strip(']')
-    string = "".join(s.split())
-    return string
+    num = bin2num(arr)
+    return num
 
 ################################################################################
 
-def str2vect(string):
+def num2vect(num,node_num):
     '''Converts a binary number into Vector.'''
 
+    string = format(num, 'b').zfill(node_num)
     arr = np.fromiter(string, dtype=int)
     arr = np.where(arr <= 0, -1.0, arr)
     return arr.astype(np.float32)
@@ -44,7 +53,7 @@ def frust(boolvect1,inter_mat):
 def Frustration(vect,inter_mat):
     ''' Returns frustration using the njit function '''
 
-    vect = str2vect(vect)
+    vect = num2vect(vect,inter_mat.shape[0])
     num = frust(vect,inter_mat)
     return num
 

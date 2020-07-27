@@ -98,6 +98,8 @@ def ReadRules(file, model):
                 path +
                 file +
                 '.ids')).readlines()]  # Contains all the nodes (from .ids)
+    
+    NODES = sorted(NODES) #sorting the nodes alphabetically
 
     INTERMAT = np.ascontiguousarray([[0] * len(NODES)] * len(NODES))  # Interaction matrix
 

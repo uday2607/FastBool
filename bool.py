@@ -19,7 +19,7 @@ global NODES, INTERMAT
 
 if __name__ == '__main__':
     if sys.argv[1]:
-        in_file=sys.argv[1] #Either you can give the name of the file (Remember, not zero as zero means name of python file)
+        in_file = sys.argv[1] #Either you can give the name of the file (Remember, not zero as zero means name of python file)
     else:
         in_file = 'bool.in' #Or it takes in the default file
 

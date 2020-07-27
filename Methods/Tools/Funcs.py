@@ -86,6 +86,7 @@ class tempmap(np.memmap):
             del self.temp_file_obj
 
 def np_as_tmp_map(nparray): #A useful function for creating arrays fast
+
     tmpmap = tempmap(dtype=nparray.dtype, mode='w+', shape=nparray.shape)
     tmpmap[...] = nparray
     return tmpmap

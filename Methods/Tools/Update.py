@@ -1,4 +1,4 @@
-def FixedState(bool_vect,fixed_state):
+def UpdateFixedState(bool_vect,fixed_state):
     ''' Chages the values of nodes which have predefined values '''
 
     if fixed_state:
@@ -10,7 +10,7 @@ def FixedState(bool_vect,fixed_state):
 
 ################################################################################
 
-def TurnState(boolvect,time_step,turn_state,fixed_state):
+def UpdateTurnState(boolvect,time_step,turn_state,fixed_state):
     ''' Fixes nodes at the given time '''
 
     if turn_state:
@@ -25,5 +25,5 @@ def TurnState(boolvect,time_step,turn_state,fixed_state):
         return boolvect,turn_state, fixed_state
     else:
         return boolvect, turn_state, fixed_state
-        
+
 ################################################################################

@@ -127,24 +127,24 @@ def PreDefine(INPUT, nodes):
     ''' Give values to all the nodes which are predefined  '''
 
     ini_state = {}  # define inital states of each nodes
-    for on_nodes in INPUT['ini_on']:
-        ini_state[nodes.index(on_nodes)] = INPUT['node_values'][0]
-    for off_nodes in INPUT['ini_off']:
-        ini_state[nodes.index(off_nodes)] = INPUT['node_values'][1]
+    for nodes in INPUT['ini_on']:
+        ini_state[nodes.index(nodes)] = INPUT['node_values'][0]
+    for nodes in INPUT['ini_off']:
+        ini_state[nodes.index(nodes)] = INPUT['node_values'][1]
 
     fixed_state = {}  # define fixed states of the nodes
-    for on_nodes in INPUT['fixed_on']:
-        fixed_state[nodes.index(on_nodes)] = INPUT['node_values'][0]
-    for off_nodes in INPUT['fixed_off']:
-        fixed_state[nodes.index(off_nodes)] = INPUT['node_values'][1]
+    for nodes in INPUT['fixed_on']:
+        fixed_state[nodes.index(nodes)] = INPUT['node_values'][0]
+    for nodes in INPUT['fixed_off']:
+        fixed_state[nodes.index(nodes)] = INPUT['node_values'][1]
 
     turn_state = {}  # define turn on/off of the States
-    for on_nodes in INPUT['turn_on']:
-        turn_state[nodes.index(on_nodes[0])] = [
-            on_nodes[1], INPUT['node_values'][0]]
-    for off_nodes in INPUT['turn_off']:
-        turn_state[nodes.index(off_nodes[0])] = [
-            on_nodes[1], INPUT['node_values'][1]]
+    for nodes in INPUT['turn_on']:
+        turn_state[nodes.index(nodes[0])] = [
+            int(nodes[1]), INPUT['node_values'][0]]
+    for nodes in INPUT['turn_off']:
+        turn_state[nodes.index(nodes[0])] = [
+            int(nodes[1]), INPUT['node_values'][1]]
 
     return ini_state, fixed_state, turn_state
 

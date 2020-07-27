@@ -74,8 +74,8 @@ def Simulation(nodes,inter_mat,input,IniState,FixedState,TurnState,folder):
         rounds = input['rounds']
     else:
         rounds = 2**len(nodes)
-    Number of simulation Runs
-    run_power = math.ceil(math.ceil(highestPowerof2(rounds))/2) #So that we can create a nested for loop for multiple processes
+    # Number of simulations
+    run_power = math.ceil((highestPowerof2(rounds)/2)) # So that we can create a nested for loop for multiple processes
     values = input['node_values'] #Values of node
 
     basin_dic = {}  # store attractor for each state, key as basin state, value as attractor state.

@@ -2,9 +2,30 @@ import numpy as np
 import math
 import tempfile
 import numba as nb
+import pickle
+import os
 
 ''' Important functions which can be used throughout the package '''
-################################################################################
+
+def num2vect(num,node_num):
+    '''Converts a binary number into Vector.'''
+
+    string = format(num, 'b').zfill(node_num)
+    arr = np.fromiter(string, dtype=int)
+    arr = np.where(arr <= 0, -1.0, arr)
+    return arr.astype(np.float32)
+
+def col2vect(arr,node_num):
+
+    vect_arr = []
+    for num in arr:
+        num = int(num)
+        vect_arr.append(num2vect(num,node_num))
+
+    return np.array(vect_arr)
+
+################################################################################################################
+
 @nb.jit(nopython=True, cache=True, nogil=True, fastmath=True)
 def bin2num(arr):
 
@@ -23,17 +44,31 @@ def vect2num(input):
     num = bin2num(arr)
     return num
 
-################################################################################
+def rows2num(arr):
 
-def num2vect(num,node_num):
-    '''Converts a binary number into Vector.'''
+    array = []
+    for i in arr:
+        array.append(vect2num(i))
 
-    string = format(num, 'b').zfill(node_num)
-    arr = np.fromiter(string, dtype=int)
-    arr = np.where(arr <= 0, -1.0, arr)
-    return arr.astype(np.float32)
+    return np.array(array)
 
-################################################################################
+################################################################################################################
+
+def load_data(file_name): #You may dump multiple objects to pickle file using 'ab' (append binary) attribute in the above function
+    #This function can retrive multiple objects dumped to a single file
+    with open(file_name, "rb") as f:
+        while True:
+            try:
+                yield pickle.load(f) #if there's a single object dumped you can retrive it using pickle.load(file)
+            except EOFError: #Once all the appended data is retrived, we get no data encounter error. So using try except we can break once we get all the data
+                break
+
+def pickle_file(arr, file_name):
+
+    with open(file_name, 'wb') as file: #Always open file with 'wb' attributes when pickling. (wb -> write binary)
+        pickle.dump(arr, file, protocol=pickle.HIGHEST_PROTOCOL) #HIGHEST_PROTOCOL -> fast and less memory
+
+################################################################################################################
 
 @nb.jit(nopython=True, cache=True, nogil=True, fastmath=True)
 def frust(boolvect1,inter_mat):
@@ -91,15 +126,4 @@ def np_as_tmp_map(nparray): #A useful function for creating arrays fast
     tmpmap[...] = nparray
     return tmpmap
 
-################################################################################
-
-import pickle
-
-def load_data(filename):
-    with open(filename, "rb") as f:
-        while True:
-            try:
-                yield pickle.load(f)
-            except EOFError:
-                break
 ################################################################################

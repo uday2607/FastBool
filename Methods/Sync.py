@@ -56,7 +56,7 @@ def Dynamics(IniVector,inter_mat,steps,values,fixed_state,turn_state,networkx,pl
 
     if networkx:
         with open('traj.f', 'ab') as f:
-            pickle.dump(state_traj,f, protocol=pickle.HIGHEST_PROTOCOL)
+            pickle.dump(state_traj,f)
 
     if np.all(prevVector == nextVector): #Fixed Point Attractors
         return (True, vect2num(IniVector), vect2num(nextVector), PlotNodes) #Fixed Point steady state. IniVector is the basin of the Steady state

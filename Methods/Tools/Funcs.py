@@ -66,7 +66,7 @@ def load_data(file_name): #You may dump multiple objects to pickle file using 'a
 def pickle_file(arr, file_name):
 
     with open(file_name, 'wb') as file: #Always open file with 'wb' attributes when pickling. (wb -> write binary)
-        pickle.dump(arr, file, protocol=pickle.HIGHEST_PROTOCOL) #HIGHEST_PROTOCOL -> fast and less memory
+        pickle.dump(arr, file)
 
 ################################################################################################################
 

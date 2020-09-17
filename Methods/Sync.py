@@ -82,6 +82,9 @@ def Simulation(nodes,inter_mat,input,IniState,FixedState,TurnState,folder):
     SteadyState = {}  # store steadystate and its frequency
     frustration = {} # store frustration of each stable stable, stable state as key, frustration as value
 
+    if input['NetworkX']: # For windows functionality
+        f = open('traj.f', 'wb')
+        f.close()
 
     if input['Parallel_Process']:
         print("\nParallel Process support is enabled. Number of Individual processes is %s" % input['Number_processes'])

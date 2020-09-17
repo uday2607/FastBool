@@ -1,4 +1,4 @@
-network = sclcnetwork
+network = melanoma
 node_values = 1,-1
 ini_on = 
 ini_off =  

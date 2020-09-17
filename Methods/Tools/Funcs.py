@@ -2,7 +2,7 @@ import numpy as np
 import math
 import tempfile
 import numba as nb
-import pickle
+import pickle, gzip
 import os
 
 ''' Important functions which can be used throughout the package '''

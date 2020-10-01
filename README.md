@@ -8,7 +8,7 @@ Command to run: python bool.py bool.in
 bool.in file has all the instructions for the simulation. These are:
 <br>
 <br>
-network -> name of the network (.topo and .ids file with this nae should be present in the same folder) <br>
+network -> name of the network (.topo and .ids file with this name should be present in the same folder) <br>
 node_values -> Binary values assigned for the <br>
 ini_on -> Name of nodes seprated by ',' which have initial value of 'high' (value depends on node_values) <br>
 ini_off -> Name of nodes seprated by ',' which have initial value of 'low' (value depends on node_values) <br>
